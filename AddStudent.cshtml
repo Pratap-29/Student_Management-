@@ -1,0 +1,98 @@
+﻿@model StudentManagement.Models.Student
+
+@{
+    ViewBag.Title = "AddStudent";
+}
+
+<h2>AddStudent</h2>
+
+
+@using (Html.BeginForm("AddStudent","Home")) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Student</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Gender")<br />
+        <span>
+            @Html.RadioButtonFor(model => model.Gender, "Male")
+            @Html.Label("Male")
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </span>
+
+        <span>
+            @Html.RadioButtonFor(model => model.Gender, "Female")
+            @Html.Label("Female")
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </span>
+
+
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Course, htmlAttributes: new { @class = "control-label col-md-2" })
+
+        <div class="col-md-10">
+            @Html.DropDownListFor(
+                model => model.Course,
+                new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "-- Select Course --", Value = "" },
+                    new SelectListItem { Text = "Full Stack .NET", Value = "Full Stack .NET" },
+                    new SelectListItem { Text = "Full Stack Python", Value = "Full Stack Python" },
+                    new SelectListItem { Text = "Full Stack Java", Value = "Full Stack Java" },
+                    new SelectListItem { Text = "Data Science", Value = "Data Science" },
+                    new SelectListItem { Text = "Machine Learning", Value = "Machine Learning" },
+                    new SelectListItem { Text = "Cloud Computing", Value = "Cloud Computing" }
+                },
+                new { @class = "form-control" }
+            )
+
+            @Html.ValidationMessageFor(model => model.Course, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
